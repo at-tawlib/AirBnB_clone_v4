@@ -1,14 +1,14 @@
 $(document).ready(function() {
 	let amenities = {}
-	$("input[data-id]").each(function() {
+	$(".amenities input[data-id]").each(function() {
 		let self = $(this);
 		self.click(function() {
 			if(self.is(":checked")) {
-				amenities[self.data("id")] = self.data("name");
+				amenities[self.data("name")] = self.data("id");
 			} else {
-				delete amenities[self.data("id")]
+				delete amenities[self.data("name")]
 			}
-			$(".amenities h4").text(Object.values(amenities).sort().join(", "));
+			$(".amenities h4").text(Object.keys(amenities).sort().join(", "));
 		});
 
 	});
@@ -16,7 +16,6 @@ $(document).ready(function() {
 
 	let url = "http://0.0.0.0:5001/api/v1/status/";
 	$.getJSON(url).done(function (data) {
-		console.log(data);
 
 		if(data["status"] == "OK") {
 			$("div#api_status").addClass("available");
@@ -32,8 +31,6 @@ $(document).ready(function() {
 		dataType: "json",
 		contentType: "application/json",
 		success: function(data) {
-			console.log(data);
-
 			$("Section.places").append(
 			data.forEach((d)=> {
 				$("section.places").append(setPlacesArticle(d));
@@ -60,5 +57,4 @@ $(document).ready(function() {
 				</div>
 			</article>`;
 	}
-
 });
