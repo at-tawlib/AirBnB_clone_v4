@@ -16,8 +16,6 @@ $(document).ready(function() {
 
 	let url = "http://0.0.0.0:5001/api/v1/status/";
 	$.getJSON(url).done(function (data) {
-		console.log(data);
-
 		if(data["status"] == "OK") {
 			$("div#api_status").addClass("available");
 		}else {
@@ -32,7 +30,6 @@ $(document).ready(function() {
 		dataType: "json",
 		contentType: "application/json",
 		success: function(data) {
-			console.log(data);
 
 			$("Section.places").append(
 			data.forEach((d)=> {
@@ -62,6 +59,7 @@ $(document).ready(function() {
 	}
 
 	$(".filters button").on("click", function() {
+
 		$.ajax({
 			type: "POST",
 			url: "http://0.0.0.0:5001/api/v1/places_search/",
@@ -69,7 +67,7 @@ $(document).ready(function() {
 			dataType: "json",
 			contentType: "application/json",
 			success: function(data) {
-				console.log(data);
+				$("Section.places").empty();
 				$("Section.places").append(
 				data.forEach((d)=> {
 					$("section.places").append(setPlacesArticle(d));
