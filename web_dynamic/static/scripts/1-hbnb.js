@@ -8,7 +8,6 @@ $(document).ready(function() {
 			} else {
 				delete amenities[self.data("id")]
 			}
-			//setText();
 			$(".amenities h4").text(Object.values(amenities).sort().join(", "));
 		});
 
